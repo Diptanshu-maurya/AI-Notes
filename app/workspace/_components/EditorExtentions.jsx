@@ -35,14 +35,14 @@ function EditorExtentions({editor}) {
     unfomattedAns && unfomattedAns.forEach((item)=>{
       allunfomattedAns+=item.pageContent;
     })
-    const PROMPT="for question:"+selectedText+"and with the given content please give the appropriate answer in html formt.Answer content is:"+allunfomattedAns;
+    const PROMPT="for question:"+selectedText+"and with the given content please give the appropriate answer by taking this as a context  in html formt. Dont repeat the question just give the answer.Answer content is:"+allunfomattedAns;
 
     const AimodelResult=await chatSession.sendMessage(PROMPT)
     console.log(AimodelResult.response.text())
     const finalAnswer=AimodelResult.response.text().replace('```','').replace('html','').replace('```','');
 
     const Alltext=editor.getHTML();
-    editor.commands.setContent(Alltext+`<p> <strong>Answer:</strong>${finalAnswer} </p>`)
+    editor.commands.setContent(Alltext+`<p> <div> <strong>Question:</strong> ${selectedText}  </div> <div><strong>Answer:</strong>${finalAnswer}</div>  </p>`)
     saveNotes({
       notes:editor.getHTML(),
       fileId:fileId,

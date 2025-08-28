@@ -10,6 +10,7 @@ import { useQuery } from 'convex/react'
 import { api } from '@/convex/_generated/api'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
+import { FaFilePdf } from "react-icons/fa6";
 
 
 function Sidebar() {
@@ -26,9 +27,14 @@ function Sidebar() {
    })
   return (
     <div className='shadow-md h-screen p-4'>
+      <div className='flex items-center justify-center'> 
+        <span className='text-3xl '><FaFilePdf ></FaFilePdf></span>
 
-      <Image className='ml-16' src={'/logo.svg'} alt='logo' width={70} height={120}></Image>
-      <div className='mt-5'>
+      </div>
+      
+
+      {/* <Image className='ml-16' src={'/logo.svg'} alt='logo' width={70} height={120}></Image> */}
+      <div className='mt-6'>
         
         <UploadPdfDialog isMaxFile={(fileList?.length>=5&&!GetUserInfo.upgrade)?true:false}>
         <Button className='w-full'>Upload PDF</Button>

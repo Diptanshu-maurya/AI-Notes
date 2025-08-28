@@ -4,27 +4,82 @@ import { TaskType } from "@google/generative-ai";
 import { action } from "./_generated/server.js";
 import { v } from "convex/values";
 
+
+// export const ingest = action({
+//   args: {
+//     splitText: v.array(v.string()),
+//     fileId: v.string(),
+//   },
+//   handler: async (ctx, args) => {
+//     await ConvexVectorStore.fromTexts(
+//       args.splitText, 
+//       // must be an array of metadata, one per split
+//       args.splitText.map(() => ({ fileId: args.fileId })),  
+//       new GoogleGenerativeAIEmbeddings({
+//         apiKey: 'AIzaSyC_Xr61bxpUjJUAPz3cbnv7OX2OjBn8omo',
+//         model: "text-embedding-004",
+//         taskType: TaskType.RETRIEVAL_DOCUMENT,
+//         title: "Document title",
+//       }),
+//       { ctx, table: "documents" }  // 👈 target your table
+//     );
+//     return "completed";
+//   },
+// });
+
+
+
+
+
 export const ingest = action({
   args: {
-    splitText:v.any(),
+    splitText: v.array(v.string()),
     fileId:v.string()
   },
+
   handler: async (ctx,args) => {
+    console.log("Ingesting data:", { 
+      textCount: args.splitText.length, 
+      fileId: args.fileId 
+    });
     await ConvexVectorStore.fromTexts(
-      args.splitText, //array
-      args.fileId,   //string
+      args.splitText,
+      
+      args.splitText.map(() => ({ fileId: args.fileId })),
       new GoogleGenerativeAIEmbeddings({
-        apiKey: 'AIzaSyC_Xr61bxpUjJUAPz3cbnv7OX2OjBn8omo',
+        apiKey: 'AIzaSyCWeB-PKq7gAFsptuirigyHVOlHGhD-jGg',
         model: "text-embedding-004", // 768 dimensions
         taskType: TaskType.RETRIEVAL_DOCUMENT,
         title: "Document title",
       }),
-      { ctx }
+      { ctx,table: "documents"}
     
     );
     return "completed"
   },
 });
+
+// export const ingest = action({
+//   args: {
+    
+//   },
+//   handler: async (ctx,args) => {
+//     await ConvexVectorStore.fromTexts(
+//       ["Hello world", "bye bye", " tata"], //array
+//       [{ fileId: "abc" }, { fileId: "def" }], //string
+//       new GoogleGenerativeAIEmbeddings({
+//         apiKey: 'AIzaSyC_Xr61bxpUjJUAPz3cbnv7OX2OjBn8omo',
+//         model: "text-embedding-004", // 768 dimensions
+//         taskType: TaskType.RETRIEVAL_DOCUMENT,
+//         title: "Document title",
+//       }),
+//       { ctx, table: "documents" }
+    
+//     );
+//     return "completed"
+//   },
+// });
+
 export const search = action({
   args: {
     query: v.string(),

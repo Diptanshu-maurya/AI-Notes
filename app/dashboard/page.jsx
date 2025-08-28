@@ -15,7 +15,7 @@ function Dashboard() {
  // console.log(typeof fileList);
   return (
     <div>
-      <h2 className='font-medium text-xl'>WorkSpace</h2>
+      
       <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 mt-6 ml-5'>
         
         {fileList?.length>0?fileList.map((file,i)=>(

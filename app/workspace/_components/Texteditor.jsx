@@ -16,7 +16,7 @@ function Texteditor({fileId}) {
   const editor = useEditor({
     extensions: [StarterKit,
       Placeholder.configure({
-        placeholder:'write something....'
+        placeholder:'Start writing your notes!'
       }),Underline, Highlight.configure({ multicolor: true })
     ],
     

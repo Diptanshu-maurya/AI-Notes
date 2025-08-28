@@ -22,7 +22,7 @@ function workspace() {
   return (
     <div>
       
-      <WorkSpaceHeader fileName={fileInfo?.fileName}></WorkSpaceHeader>
+      <WorkSpaceHeader fileName={fileInfo?.fileName} fileId={fileId}></WorkSpaceHeader>
       <div className='grid grid-cols-2 gap-5 p-4'>
         <div>
                 <Texteditor fileId={fileId}></Texteditor>
