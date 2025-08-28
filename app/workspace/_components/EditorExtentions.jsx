@@ -35,7 +35,19 @@ function EditorExtentions({editor}) {
     unfomattedAns && unfomattedAns.forEach((item)=>{
       allunfomattedAns+=item.pageContent;
     })
-    const PROMPT="for question:"+selectedText+"and with the given content please give the appropriate answer by taking this as a context  in html formt. Dont repeat the question just give the answer.Answer content is:"+allunfomattedAns;
+    // const PROMPT="for question:"+selectedText+"and with the given content please give the appropriate answer by taking this as a context  in html formt. Dont repeat the question just give the answer.Answer content is:"+allunfomattedAns;
+    const PROMPT = `
+     You are given the following question: "${selectedText}".
+     Use the provided content as context to generate the most appropriate answer.
+
+  Requirements:
+- Output only the answer in valid, well-structured HTML format.
+- Do NOT repeat or restate the question.
+- Focus only on the answer using the given context.
+- Use the following content as the answer base: "${allunfomattedAns}".
+- Use the given context and your knewledge also.
+`;
+
 
     const AimodelResult=await chatSession.sendMessage(PROMPT)
     console.log(AimodelResult.response.text())
