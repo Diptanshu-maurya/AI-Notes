@@ -51,6 +51,7 @@ export default function Home() {
             Upload your PDFs and let AI generate concise, smart, and structured notes —
             so you can focus on learning, not summarizing.
           </p>
+          {console.log("production url",process.env.NEXT_PUBLIC_API_URL)}
 
           <div className="mt-8 flex gap-4 justify-center md:justify-start">
             <SignInButton mode="modal" redirectUrl="/dashboard">
