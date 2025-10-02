@@ -16,7 +16,7 @@ import { v } from "convex/values";
 //       // must be an array of metadata, one per split
 //       args.splitText.map(() => ({ fileId: args.fileId })),  
 //       new GoogleGenerativeAIEmbeddings({
-//         apiKey: 'AIzaSyC_Xr61bxpUjJUAPz3cbnv7OX2OjBn8omo',
+//         apiKey: 'AIzaSyC_Xr61bxpUj......................',
 //         model: "text-embedding-004",
 //         taskType: TaskType.RETRIEVAL_DOCUMENT,
 //         title: "Document title",
@@ -38,10 +38,10 @@ export const ingest = action({
   },
 
   handler: async (ctx,args) => {
-    console.log("Ingesting data:", { 
-      textCount: args.splitText.length, 
-      fileId: args.fileId 
-    });
+    // console.log("Ingesting data:", { 
+    //   textCount: args.splitText.length, 
+    //   fileId: args.fileId 
+    // });
     await ConvexVectorStore.fromTexts(
       args.splitText,
       
@@ -69,7 +69,7 @@ export const ingest = action({
 //       ["Hello world", "bye bye", " tata"], //array
 //       [{ fileId: "abc" }, { fileId: "def" }], //string
 //       new GoogleGenerativeAIEmbeddings({
-//         apiKey: 'AIzaSyC_Xr61bxpUjJUAPz3cbnv7OX2OjBn8omo',
+//         apiKey: 'AIzaSyC_Xr61bxpUjJUAPz.................',
 //         model: "text-embedding-004", // 768 dimensions
 //         taskType: TaskType.RETRIEVAL_DOCUMENT,
 //         title: "Document title",
@@ -89,7 +89,7 @@ export const search = action({
   handler: async (ctx, args) => {
     const vectorStore = new ConvexVectorStore(
       new GoogleGenerativeAIEmbeddings({
-        apiKey: 'AIzaSyC_Xr61bxpUjJUAPz3cbnv7OX2OjBn8omo',
+        apiKey: process.env.NEXT_PUBLIC_GEMINI_API_KEY,
         model: "text-embedding-004", // 768 dimensions
         taskType: TaskType.RETRIEVAL_DOCUMENT,
         title: "Document title",

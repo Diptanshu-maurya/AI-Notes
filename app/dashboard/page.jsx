@@ -15,6 +15,8 @@ function Dashboard() {
  // console.log(typeof fileList);
   return (
     <div>
+
+      <div > {fileList?.length==0 && <div className='mt-4 ml-4 font-semibold text-2xl'> NO PDF AVAILABLE ....   </div>} </div>
       
       <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 mt-6 ml-5'>
         
@@ -26,9 +28,7 @@ function Dashboard() {
             <h2>{file?.fileName}</h2>
           </div>
           </Link>
-        )):[1,2,3,4,5,6,7,].map((item,i)=>(
-           <div key={i} className='bg-slate-400 rounded-md h-[150px] animate-pulse' ></div>
-        ))}
+        )): <div> </div>}
       </div>
     </div>
   )
