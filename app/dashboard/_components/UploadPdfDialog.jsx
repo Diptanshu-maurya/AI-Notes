@@ -122,7 +122,7 @@ function UploadPdfDialog({ children, isMaxFile }) {
 
   return (
     <div>
-      <Dialog open={open}>
+      <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
           <Button
             className="w-full"
